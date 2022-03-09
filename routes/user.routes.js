@@ -35,9 +35,17 @@ router.put("/profile/:user_id/edit", isAuthenticated, (req, res) => {
 
     User
         .findByIdAndUpdate(_id, { email, aboutMe, flightHours, imageURL })
-        .then(response => {
-            res.json(response)
-        })
+        .then(response => res.status(200).json(response))
+        .catch(err => res.status(500).json(err))
+})
+
+router.put("/profile/:user_id/role", isAuthenticated, (req, res) => {
+
+    const user_id = req.params.user_id
+    const { role } = req.body
+    User
+        .findByIdAndUpdate(user_id, { role })
+        .then(response => res.status(200).json(response))
         .catch(err => res.status(500).json(err))
 })
 

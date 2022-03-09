@@ -72,6 +72,16 @@ router.put("/:event_id/join", isAuthenticated, (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
+router.put("/:event_id/quit", isAuthenticated, (req, res) => {
+
+    const { event_id } = req.params
+    console.log(req.payload);
+    Event
+        .findByIdAndUpdate(event_id, { $pull: { participants: req.payload._id } })
+        .then(response => res.status(200).json(response))
+        .catch(err => res.status(500).json(err))
+})
+
 router.delete('/:event_id/deleteParticipant', isAuthenticated, (req, res) => {
     const { event_id } = req.params
 
