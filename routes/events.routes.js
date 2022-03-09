@@ -72,12 +72,12 @@ router.put("/:event_id/join", isAuthenticated, (req, res) => {
         .catch(err => res.status(500).json(err))
 })
 
-router.put("/:event_id/quit", isAuthenticated, (req, res) => {
+router.put("/:event_id/:user_id/quit", isAuthenticated, (req, res) => {
 
-    const { event_id } = req.params
+    const { event_id, user_id } = req.params
     console.log(req.payload);
     Event
-        .findByIdAndUpdate(event_id, { $pull: { participants: req.payload._id } })
+        .findByIdAndUpdate(event_id, { $pull: { participants: user_id } })
         .then(response => res.status(200).json(response))
         .catch(err => res.status(500).json(err))
 })

@@ -61,10 +61,9 @@ router.delete("/profile/:_id/delete", isAuthenticated, (req, res) => {
 
 router.post("/profile", isAuthenticated, (req, res) => {
 
-    const { username, name, lastname, nif, flightHours, aboutMe, password, imageURL, birth, email } = req.body
-
+    const { username, name, lastName, nif, flightHours, aboutMe, password, imageURL, birth, email } = req.body
     User
-        .create({ username, name, lastname, nif, flightHours, aboutMe, password, imageURL, birth, email })
+        .create({ username, name, lastName, nif, flightHours, aboutMe, password, imageURL, birth, email })
         .then(response => res.status(200).json(response))
         .catch(err => res.status(500).json(err))
 })
