@@ -7,7 +7,7 @@ router.get("/profile", isAuthenticated, (req, res) => {
 
     User
         .find()
-        .select('name lastname username email role')
+        .select('name lastName username email role')
         .then(response => res.status(200).json(response))
         .catch(err => res.status(500).json(err))
 })
